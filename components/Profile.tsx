@@ -3,6 +3,12 @@
 import { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 
+interface User {
+    id: string;
+    name: string;
+    distance: number; // Example property
+}
+
 // Connect to the Socket.IO server
 const socket = io('http://localhost:3001');  // Adjust this if your server is running on a different port
 
@@ -11,14 +17,14 @@ export default function Profile() {
     const [name, setName] = useState('');
     const [bio, setBio] = useState('');
     const [location, setLocation] = useState({ latitude: 0, longitude: 0 });
-    const [nearbyUsers, setNearbyUsers] = useState<any[]>([]);
+    const [nearbyUsers, setNearbyUsers] = useState<User[]>([]);
 
     useEffect(() => {
         // Fetch the user's geolocation on component mount
         getUserLocation();
 
         // Listen for nearby users from the server
-        socket.on('nearby-users', (users: any[]) => {
+        socket.on('nearby-users', (users: User[]) => {
             setNearbyUsers(users);
         });
 
@@ -45,7 +51,7 @@ export default function Profile() {
 
             // Emit user location to the server
             socket.emit('user-location', { latitude, longitude });
-        } catch (error: any) {
+        } catch (error) {
             // Log the entire error to understand its structure
             console.error('Error getting location:', error);
 

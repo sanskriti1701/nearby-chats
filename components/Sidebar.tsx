@@ -2,7 +2,11 @@
 "use client";
 import { useState } from 'react';
 
-const Sidebar = ({ setActiveSection }) => {
+interface SidebarProps {
+    setActiveSection: (section: string) => void;
+}
+
+const Sidebar = ({ setActiveSection }: SidebarProps) => {
     const [active, setActive] = useState('chat');
 
     const handleClick = (section: string) => {
