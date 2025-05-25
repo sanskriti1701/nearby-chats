@@ -1,8 +1,9 @@
-import Layout from "@/components/Layout";
-import Image from "next/image";
+import NearbyFinder from '@/components/NearbyFinder';
 
 export default function Home() {
   return (
-    <Layout />
+    <main className="flex min-h-screen items-center justify-center bg-gray-100">
+      <NearbyFinder />
+    </main>
   );
 }
