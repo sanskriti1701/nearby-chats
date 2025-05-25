@@ -8,7 +8,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: 'http://localhost:3001',
+        origin: 'https://sweet-zabaione-577224.netlify.app',
         methods: ['GET', 'POST'],
     }
 });
